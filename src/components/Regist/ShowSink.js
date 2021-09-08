@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ListGroup } from 'react-bootstrap';
 
-function ShowPickedNode(props) {
-  const [nodes, setNodes] = useState(null);
+function ShowSink(props) {
+  const [sinks, setSinks] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  var api = 'http://localhost:5000/sinks'
+  //var api = 'http://localhost:5000/sinks'
+  var api = 'http://172.20.10.3:8080/regist/sinks'
 
-  const fetchNodes = async () => {
+  const fetchSinks = async () => {
     try {
       // 요청이 시작 할 때에는 error 와 users 를 초기화하고
       setError(null);
-      setNodes(null);
+      setSinks(null);
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
 
@@ -20,7 +22,8 @@ function ShowPickedNode(props) {
       const response = await axios.get(
         api
       );
-      setNodes(response.data);
+      setSinks(response.data);
+      console.log(sinks);
     } catch (e) {
       setError(e);
     }
@@ -28,17 +31,22 @@ function ShowPickedNode(props) {
   };
 
   useEffect(() => {
-    fetchNodes();
-  }, [props.selectedSink]);
+    fetchSinks();
+  }, []);
 
-  if (loading) return <div> 싱크노드 로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
-  if (!nodes) return null;
+  //props.selectedSink 위에있던거
+
+
+  if (loading) return <div> Loading...</div>;
+  if (error) return <div>Error Occurred!</div>;
+  if (!sinks) return null;
   return (
     <>
-      <ul>
-        {nodes.map(sink => (
-          <li key={sink.id} onClick={function(){
+      <ListGroup style={{height:"60vh", overflow:"auto"}}>
+        {sinks.map(sink => (
+          <ListGroup.Item
+              action variant="light"
+              key={sink.id} onClick={function(){
               props.setSelectedSink(sink.id);
               props.setSelectedNode(0);
               props.setSelectedSensor(0);
@@ -48,14 +56,15 @@ function ShowPickedNode(props) {
                 sink.id === props.selectedSink
                     ? ({background:"skyblue"})
                     : ({background:""})
-            }>
+            }
+            >
             {sink.name} ({sink.id})
-          </li>
+          </ListGroup.Item>
         ))}
-      </ul>
-      <button onClick={fetchNodes}>다시 불러오기</button>
+      </ListGroup>
+      <button onClick={fetchSinks}>Reload</button>
     </>
   );
 }
 
-export default ShowPickedNode;
+export default ShowSink;

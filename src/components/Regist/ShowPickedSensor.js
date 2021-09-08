@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ListGroup } from 'react-bootstrap';
 
 function ShowPickedSensor(props) {
   const [sensors, setSensors] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  var api = 'http://localhost:5000/sensors'
+  //var api = 'http://localhost:5000/sensors'
+  var api = 'http://172.20.10.3:8080/regist/sensors'
 
   const fetchNodes = async () => {
     try {
@@ -15,7 +17,8 @@ function ShowPickedSensor(props) {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
 
-      api = api + '?node_id='+ props.selectedNode; //추후 수정 필요
+      //api = api + '?node_id='+ props.selectedNode; //추후 수정 필요
+      api = api + '/'+ props.selectedNode; //추후 수정 필요
 
       const response = await axios.get(
         api
@@ -30,39 +33,46 @@ function ShowPickedSensor(props) {
 
   useEffect(() => {
     fetchNodes();
-  }, [props.selectedNode,props.selectedSensor]);
+  }, [props.selectedNode]);
+
+  //props.selectedNode,props.selectedSensor 위에있던거
 
   const arrToli = (array) => {
       let result = [];
+      console.log("showpickedsensor:",array);
       for (let i=0; i<array[0].length; i++) {
           result.push(
-              <li key={i}>{array[0][i]}</li>
+              <ListGroup.Item key={i}>{array[0][i].value_name}</ListGroup.Item>
             );
+          console.log(array[0][i].value_name);
       }
-      return result;
+      return <ListGroup>{result}</ListGroup>;
   }
 
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error Occurred!</div>;
   if (!sensors) return null;
   return (
-    <>
-      <ul style={{height:"25vh"}}>
+    <div style={{height:"60vh"}}>
+      <ListGroup style={{height:"35vh", overflow:"auto"}}>
         {sensors.map(sensor => (
-          <li key={sensor.id} onClick={function(){
+          <ListGroup.Item
+              action variant="light"
+              key={sensor.id} onClick={function(){
               props.setSelectedSensor(sensor.id);
             }}
             style={
                 sensor.id === props.selectedSensor
                     ? ({background:"skyblue"})
                     : ({background:""})
-            }>
+            }
+            >
             {sensor.name} ({sensor.id})
-          </li>
+          </ListGroup.Item>
         ))}
-      </ul>
-      <button onClick={fetchNodes}>다시 불러오기</button>
-      <div>
+      </ListGroup>
+      <button onClick={fetchNodes}>Reload</button>
+      <div style={{height:"24vh", overflow:"auto"}}>
           { props.selectedSensor === 0
             ? ""
             : "Sensor Values of <" + sensors.filter(t=>t.id === props.selectedSensor).map(t=>t.name) + "> : "}
@@ -71,7 +81,7 @@ function ShowPickedSensor(props) {
             : arrToli(sensors.filter(t => t.id === props.selectedSensor).map(t => t.sensor_values))
             }
       </div>
-    </>
+    </div>
   );
 }
 

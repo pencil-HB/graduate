@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import HomeLeft from "./HomeLeft"
-import HomeRight from "./HomeRight"
-
-import VisionLeft from './VisionLeft';
-import VisionRight from './VisionRight';
+import HomeLeft from "./Home/HomeLeft"
+import HomeRight from "./Home/HomeRight"
+import VisionLeft from './Vision/VisionLeft';
+import VisionRight from './Vision/VisionRight';
 import Regist from './Regist';
+import { Container } from 'react-bootstrap';
 
 class Middle extends Component {
   render() {
       if(this.props.page === 'Home'){
-        return ( //반드시 하나의 최상위 태그만 있어야 함. 병렬 안됨!
-          <div>
+        return (
+          <Container>
             <HomeLeft></HomeLeft>
-            <HomeRight></HomeRight>
-          </div>
+            {/* <HomeRight></HomeRight> */}
+          </Container>
         );
       }
       else if(this.props.page === 'Vision') {
         return (
-          <div>
-          <VisionLeft selectedNode={this.props.selectedNode} setSelectedSensor={this.props.setSelectedSensor}></VisionLeft>
-          <VisionRight selectedSink={this.props.selectedSink} setSelectedNode={this.props.setSelectedNode}></VisionRight>
-          </div>
+          <Container>
+            <VisionLeft selectedNode={this.props.selectedNode} setSelectedSensor={this.props.setSelectedSensor}></VisionLeft>
+            <VisionRight selectedSink={this.props.selectedSink} setSelectedNode={this.props.setSelectedNode}></VisionRight>
+          </Container>
         )
       }
       else if(this.props.page === 'Regist') {

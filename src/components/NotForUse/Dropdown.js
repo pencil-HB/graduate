@@ -15,7 +15,7 @@ function Dropdown() {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get(
-        'http://localhost:5000/nodes'
+        'http://172.20.10.3:8080/regist/nodes'
       );
       setNodes(response.data); // 데이터는 response.data 안에 들어있습니다.
     } catch (e) {
@@ -28,8 +28,8 @@ function Dropdown() {
     fetchNodes();
   }, []);
 
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error Occurred!</div>;
   if (!nodes) return null;
   return (
       <select>

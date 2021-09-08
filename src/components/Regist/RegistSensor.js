@@ -10,7 +10,7 @@ class RegistSensor extends React.Component {
 
     while(i <e.target.length) {
       if (e.target[i].name === 'sensorValue'){
-        valueList.push((e.target[i].value))
+        valueList.push({"value_name" : (e.target[i].value)})
       }
       i +=1;
     }
@@ -26,12 +26,12 @@ class RegistSensor extends React.Component {
     var valueList = [];
     return(
       <div className="SensorRegist-form-wrapper">
-        <h3>센서 등록</h3>
+        <h3>Regist Sensor</h3>
         <form onSubmit={this.handleSubmit(valueList)}>
           <table>
             <tbody>
               <tr>
-                <th>센서 이름</th>
+                <th>Sensor Name : </th>
                 <td><input type='text' name='name' autoComplete="off"/></td>
               </tr>
               <AddSensor></AddSensor>
@@ -39,7 +39,7 @@ class RegistSensor extends React.Component {
                 <td><input type='hidden' name='nodeId' value={this.props.selectedNode}/></td>
               </tr>
               <tr>
-                <td colSpan='2'><input type='submit' value='제출'/></td>
+                <td colSpan='2'><input type='submit' value='Submit'/></td>
               </tr>
             </tbody>
           </table>

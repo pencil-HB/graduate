@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import ShowPickedSensor from './ShowPickedSensor';
-import ShowPickedNode from './ShowPickedNode';
-import ShowSink from './ShowSink';
-import PlusPng from '../images/plus.png';
-import MinusPng from '../images/minus.png';
-import RegistNode from './RegistNode';
-import RegistSensor from './RegistSensor';
-import RegistSink from './RegistSink';
-import Popup from './Popup';
+import ShowPickedSensor from './Regist/ShowPickedSensor';
+import ShowPickedNode from './Regist/ShowPickedNode';
+import ShowSink from './Regist/ShowSink';
+import RegistNode from './Regist/RegistNode';
+import RegistSensor from './Regist/RegistSensor';
+import RegistSink from './Regist/RegistSink';
+import Popup from './Regist/Popup';
 import axios from 'axios';
+import { Container, Row, Col } from 'react-bootstrap';
+import { FiPlusSquare,FiMinusSquare } from 'react-icons/fi';
 
 
 class Regist extends Component {
@@ -23,104 +23,125 @@ class Regist extends Component {
 
     render() {
       var size="30px";
-      var api = 'http://localhost:5000/'
+      var api = 'http://172.20.10.3:8080/regist/'
+      //var api = 'http://localhost:5000/'
 
-      return ( //반드시 하나의 최상위 태그만 있어야 함. 병렬 안됨!
-        <div>
-            <div style={{float:"left", width:"33.3%", height:"50vh"}}>
-              <div style={{display: "block"}}>
-                <h1 style={{width: "70%"}}>Sink Nodes</h1>
-                <img src={PlusPng} style={{width:size}} onClick={function()
-                {this.setState({sinkAdd: true});
-                }.bind(this)}></img>
-                <img src={MinusPng} style={{width:size}} onClick={function()
-                {
-                  if(this.props.selectedSink === 0) {alert("Select Sink Node to delete first.")}
-                  else {
-                    if(window.confirm("Are you sure to remove this Sink Node?")) {
-                      this.props.setSelectedSink(0);
-                      try {axios.delete(
-                        api+'sinks/'+ this.props.selectedSink
-                      ) }
-                      catch (e) {
-                        alert("Error!");
+      return (
+        <Container style={{marginTop:"10px"}}>
+          <Row>
+            <Col>
+              <Container>
+                <Row className="justify-content-md-center">
+                  <Col><h2 title="Sink Name (id)">Sink Nodes</h2></Col>
+                  <Col md="auto"><FiPlusSquare title="Add Sink Node" size="30" onClick={function()
+                  {this.setState({sinkAdd: true});
+                  }.bind(this)}></FiPlusSquare></Col>
+                  <Col xs lg="1">
+                  <FiMinusSquare title="Delete Sink Node" size="30" onClick={function()
+                  {
+                    if(this.props.selectedSink === 0) {alert("Select Sink Node to delete first.")}
+                    else {
+                      if(window.confirm("Are you sure to remove this Sink Node?")) {
+                        this.props.setSelectedSink(0);
+                        try {axios.delete(
+                          api+'sinks/'+ this.props.selectedSink
+                        ) }
+                        catch (e) {
+                          alert("Error!");
+                        }
                       }
                     }
-                  }
-                }.bind(this) }
-                ></img>
-              </div>
+                  }.bind(this) }
+                  ></FiMinusSquare>
+                  </Col>
+                </Row>
+              </Container>
                 <ShowSink
                     selectedSink={this.props.selectedSink} 
                     setSelectedSink={this.props.setSelectedSink}
                     setSelectedNode={this.props.setSelectedNode}
                     setSelectedSensor={this.props.setSelectedSensor}></ShowSink>
-            </div>
-            <div style={{float:"left", width:"33.3%", height:"50vh"}}>
-              <h1>Nodes</h1>
-              <img src={PlusPng} style={{width:size}} onClick={function()
-                {
-                  if(this.props.selectedSink === 0) {alert("Select Sink Node first.")}
-                  else {
-                  this.setState({nodeAdd: true}); }
-                }.bind(this)}></img>
-              <img src={MinusPng} style={{width:size}} onClick={function()
-                {
-                  if(this.props.selectedNode === 0) {alert("Select Node to delete first.")}
-                  else {
-                    if(window.confirm("Are you sure to remove this Node?")) {
-                      this.props.setSelectedNode(0);
-                      try {axios.delete(
-                        api + 'nodes/'+ this.props.selectedNode
-                      ) }
-                      catch (e) {
-                        alert("Error!");
+            </Col>
+            <Col>
+              <Container>
+                <Row>
+                  <Col><h2 title="Node Name (id)">Nodes</h2></Col>
+                  <Col md="auto"><FiPlusSquare title="Add Node" size="30" onClick={function()
+                    {
+                      if(this.props.selectedSink === 0) {alert("Select Sink Node first.")}
+                      else {
+                      this.setState({nodeAdd: true}); }
+                    }.bind(this)}></FiPlusSquare></Col>
+                  <Col xs lg="1">
+                    <FiMinusSquare title="Delete Node" size="30" onClick={function()
+                    {
+                      if(this.props.selectedNode === 0) {alert("Select Node to delete first.")}
+                      else {
+                        if(window.confirm("Are you sure to remove this Node?")) {
+                          this.props.setSelectedNode(0);
+                          try {axios.delete(
+                            api + 'nodes/'+ this.props.selectedNode
+                          ) }
+                          catch (e) {
+                            alert("Error!");
+                          }
+                        }
                       }
-                    }
-                  }
-                }.bind(this) }
-                ></img>
+                    }.bind(this) }
+                    ></FiMinusSquare>
+                  </Col>
+                </Row>
+              </Container>
                 <ShowPickedNode 
                     selectedSink={this.props.selectedSink}
                     selectedNode={this.props.selectedNode}
                     setSelectedNode={this.props.setSelectedNode}
                     setSelectedSensor={this.props.setSelectedSensor}></ShowPickedNode>
-            </div>
-            <div style={{float:"left", width:"33.3%", height:"50vh"}}>
-              <h1>Sensors</h1>
-              <img src={PlusPng} style={{width:size}} onClick={function()
-                {
-                  if(this.props.selectedNode === 0) {alert("Select Node first.")}
-                  else {
-                  this.setState({sensorAdd: true}); }
-                }.bind(this)}></img>
-                <img src={MinusPng} style={{width:size}} onClick={function()
-                {
-                  if(this.props.selectedSensor === 0) {alert("Select Sensor to delete first.")}
-                  else {
-                    if(window.confirm("Are you sure to remove this Sensor?")) {
-                      this.props.setSelectedSensor(0);
-                      try {axios.delete(
-                        api +'sensors/'+ this.props.selectedSensor
-                      ) }
-                      catch (e) {
-                        alert("Error!");
+            </Col>
+            <Col>
+              <Container>
+                <Row>
+                  <Col><h2 title="Sensor Name (id)">Sensors</h2></Col>
+                  <Col md="auto">
+                    <FiPlusSquare title="Add Sensor" size="30" onClick={function()
+                      {
+                        if(this.props.selectedNode === 0) {alert("Select Node first.")}
+                        else {
+                        this.setState({sensorAdd: true}); }
+                      }.bind(this)}></FiPlusSquare>
+                  </Col>
+                  <Col xs lg="1">
+                  <FiMinusSquare title="Delete Sensor" size="30" onClick={function()
+                    {
+                      if(this.props.selectedSensor === 0) {alert("Select Sensor to delete first.")}
+                      else {
+                        if(window.confirm("Are you sure to remove this Sensor?")) {
+                          this.props.setSelectedSensor(0);
+                          try {axios.delete(
+                            api +'sensors/'+ this.props.selectedSensor
+                          ) }
+                          catch (e) {
+                            alert("Error!");
+                          }
+                        }
                       }
-                    }
-                  }
-                }.bind(this) }
-                ></img>
+                    }.bind(this) }
+                    ></FiMinusSquare>
+                  </Col>
+                </Row>
+              </Container>
                 <ShowPickedSensor
                   selectedSensor={this.props.selectedSensor}
                   selectedNode={this.props.selectedNode}
                   setSelectedSensor={this.props.setSelectedSensor}></ShowPickedSensor>
-            </div>
+            </Col>
+          </Row>
 
             <Popup
               trigger={this.state.sinkAdd}
               triggerOff={function(){ this.setState({sinkAdd: false})}.bind(this)}>
               <RegistSink handleSinkR={function(sensor_info){
-                fetch('http://localhost:5000/sinks', {	// fetch를 통해 Ajax통신을 한다.
+                fetch(api+'sinks', {	// fetch를 통해 Ajax통신을 한다.
                 method: 'post',	// 방식은 post
                 headers: {
                   "Content-Type": "application/json; charset=utf-8"	// 헤더에서 본문 타입 설정
@@ -140,7 +161,7 @@ class Regist extends Component {
               <RegistNode 
                 selectedSink = {this.props.selectedSink}
                 handleNodeR={function(node_info){
-                fetch('http://localhost:5000/nodes', {	// fetch를 통해 Ajax통신을 한다.
+                fetch(api+'nodes', {	// fetch를 통해 Ajax통신을 한다.
                 method: 'post',	// 방식은 post
                 headers: {
                   "Content-Type": "application/json; charset=utf-8"	// 헤더에서 본문 타입 설정
@@ -159,7 +180,7 @@ class Regist extends Component {
               <RegistSensor
                 selectedNode = {this.props.selectedNode}
                 handleSensorR={function(sensor_info){
-                fetch('http://localhost:5000/sensors', {	// fetch를 통해 Ajax통신을 한다.
+                fetch(api+'sensors', {	// fetch를 통해 Ajax통신을 한다.
                 method: 'post',	// 방식은 post
                 headers: {
                   "Content-Type": "application/json; charset=utf-8"	// 헤더에서 본문 타입 설정
@@ -171,7 +192,7 @@ class Regist extends Component {
                 this.setState({sensorAdd : false});
               }.bind(this) }></RegistSensor>
             </Popup>
-        </div>
+        </Container>
       );
     }
   }

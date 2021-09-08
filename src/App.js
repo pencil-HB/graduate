@@ -4,8 +4,8 @@ import Middle from "./components/Middle"
 import Menu from "./components/Menu"
 import './App.css';
 
-class App extends Component { //App 이라는 컴포넌트를 만든 것임.
-  constructor(props){ //초기화를 담당.
+class App extends Component {
+  constructor(props){
     super(props);
     this.max_page = 3;
     this.state = {
@@ -19,7 +19,8 @@ class App extends Component { //App 이라는 컴포넌트를 만든 것임.
   render() {
     return (
       <div className="App">
-          <Menu onChangePage={function(_page){
+          <Menu 
+          onChangePage={function(_page){
             if(_page === 'Vision'){
               this.setState({
                 page: 'Vision'
@@ -50,7 +51,7 @@ class App extends Component { //App 이라는 컴포넌트를 만든 것임.
                 this.setState({selected_node: selectedNode});
               }.bind(this)}
               setSelectedSensor={function(selectedSensor){
-                this.setState({selected_sensor: selectedSensor}); //왜안되냐 왜
+                this.setState({selected_sensor: selectedSensor});
               }.bind(this)}
             ></Middle>
           </div>

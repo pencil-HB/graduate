@@ -14,19 +14,19 @@ class RegistNode extends React.Component {
   render() {
     return(
       <div className="NodeRegist-form-wrapper">
-        <h3>노드 등록</h3>
+        <h3>Regist Node</h3>
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>
               <tr>
-                <th>노드 이름</th>
+                <th>Node Name : </th>
                 <td><input type='text' name='name' autoComplete="off"/></td>
               </tr>
               <tr>
                 <td><input type='hidden' name='sinkId' value={this.props.selectedSink}></input></td>
               </tr>
               <tr>
-                <td colSpan='2'><input type='submit' value='제출'/></td>
+                <td colSpan='2'><input type='submit' value='Submit'/></td>
               </tr>
             </tbody>
           </table>

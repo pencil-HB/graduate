@@ -12,17 +12,17 @@ class RegistSink extends React.Component {
 
   render() {
     return(
-      <div className="NodeRegist-form-wrapper">
-        <h3>싱크노드 등록</h3>
+      <div className="SinkRegist-form-wrapper">
+        <h3>Regist Sink Node</h3>
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>
               <tr>
-                <th>싱크노드 이름</th>
+                <th>Sink Node Name : </th>
                 <td><input type='text' name='name' autoComplete="off"/></td>
               </tr>
               <tr>
-                <td colSpan='2'><input type='submit' value='제출'/></td>
+                <td colSpan='2'><input type='submit' value='Submit'/></td>
               </tr>
             </tbody>
           </table>

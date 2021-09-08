@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Nav, Container } from 'react-bootstrap';
+//import {Nav.Item} from "react-bootstrap";
 
 class Menu extends Component {
     render() {
-      return ( //반드시 하나의 최상위 태그만 있어야 함. 병렬 안됨!
-        <ul>
-            <li><a href="/Home" onClick={function(e){
+      return (
+        <Container>
+          <Nav variant="tabs" defaultActiveKey="/Home">
+            <Nav.Item><Nav.Link href="/Home" onClick={function(e){
                 e.preventDefault();
                 this.props.onChangePage('Home');
-            }.bind(this)}>Home</a></li>
+            }.bind(this)}>Home</Nav.Link></Nav.Item>
 
-            <li><a href="/Vision" onClick={function(e){
+            <Nav.Item><Nav.Link href="/Vision" onClick={function(e){
                 e.preventDefault();
                 this.props.onChangePage('Vision');
-            }.bind(this)}>Vision</a></li>
+            }.bind(this)}>Vision</Nav.Link></Nav.Item>
 
-            <li><a href="/Regist" onClick={function(e){
+            <Nav.Item><Nav.Link href="/Regist" onClick={function(e){
                 e.preventDefault();
                 this.props.onChangePage('Regist');
-            }.bind(this)}>Regist</a></li>
-        </ul>
+            }.bind(this)}>Regist</Nav.Link></Nav.Item>
+        </Nav>
+        </Container>
       );
     }
   }

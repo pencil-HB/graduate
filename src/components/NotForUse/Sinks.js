@@ -14,7 +14,7 @@ function Sinks() {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get(
-        'http://localhost:5000/sinks'
+        'http://172.20.10.3:8080/regist/sinks'
       );
       setSinks(response.data); // 데이터는 response.data 안에 들어있습니다.
     } catch (e) {
@@ -27,8 +27,8 @@ function Sinks() {
     fetchSinks();
   }, []);
 
-  if (loading) return <div>싱크노드 로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
+  if (loading) return <div>싱크노드 Loading...</div>;
+  if (error) return <div>Error Occurred!</div>;
   if (!nodes) return null;
   return (
     <>
@@ -39,7 +39,7 @@ function Sinks() {
           </li>
         ))}
       </ul>
-      <button onClick={fetchSinks}>다시 불러오기</button>
+      <button onClick={fetchSinks}>Reload</button>
     </>
   );
 }

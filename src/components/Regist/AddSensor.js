@@ -15,7 +15,7 @@ const AddSensor = () => {
   return (
     <>
       <DetailValue _valueList={_valueList}></DetailValue>
-      <button onClick={onAddValue}>Add</button>
+      <button onClick={onAddValue}>Add Value</button>
     </>
   )
 }
