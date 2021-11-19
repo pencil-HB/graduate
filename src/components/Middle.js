@@ -3,7 +3,7 @@ import HomeLeft from "./Home/HomeLeft"
 import HomeRight from "./Home/HomeRight"
 import VisionLeft from './Vision/VisionLeft';
 import VisionRight from './Vision/VisionRight';
-import Regist from './Regist';
+import Register from './Register';
 import { Container } from 'react-bootstrap';
 
 class Middle extends Component {
@@ -12,7 +12,6 @@ class Middle extends Component {
         return (
           <Container>
             <HomeLeft></HomeLeft>
-            {/* <HomeRight></HomeRight> */}
           </Container>
         );
       }
@@ -24,16 +23,16 @@ class Middle extends Component {
           </Container>
         )
       }
-      else if(this.props.page === 'Regist') {
+      else if(this.props.page === 'Register') {
         return (
           <div>
-            <Regist
+            <Register
               selectedSink={this.props.selectedSink}
               selectedNode={this.props.selectedNode}
               selectedSensor={this.props.selectedSensor}
               setSelectedSink={this.props.setSelectedSink}
               setSelectedSensor={this.props.setSelectedSensor}
-              setSelectedNode={this.props.setSelectedNode}></Regist>
+              setSelectedNode={this.props.setSelectedNode}></Register>
             
           </div>
         )

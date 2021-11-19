@@ -7,7 +7,7 @@ function ShowPickedSensor(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   //var api = 'http://localhost:5000/sensors'
-  var api = 'http://172.20.10.3:8080/regist/sensors'
+  var api = 'http://172.20.10.4:8080/register/sensors'
 
   const fetchNodes = async () => {
     try {
@@ -17,8 +17,8 @@ function ShowPickedSensor(props) {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
 
-      //api = api + '?node_id='+ props.selectedNode; //추후 수정 필요
-      api = api + '/'+ props.selectedNode; //추후 수정 필요
+      //api = api + '?node_id='+ props.selectedNode; 
+      api = api + '/'+ props.selectedNode; 
 
       const response = await axios.get(
         api
@@ -34,8 +34,6 @@ function ShowPickedSensor(props) {
   useEffect(() => {
     fetchNodes();
   }, [props.selectedNode]);
-
-  //props.selectedNode,props.selectedSensor 위에있던거
 
   const arrToli = (array) => {
       let result = [];

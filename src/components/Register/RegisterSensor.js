@@ -1,7 +1,7 @@
 import React from 'react';
 import AddSensor from './AddSensor';
 
-class RegistSensor extends React.Component {
+class RegisterSensor extends React.Component {
 
   handleSubmit = valueList => e => {
     e.preventDefault();
@@ -25,8 +25,8 @@ class RegistSensor extends React.Component {
   render() {
     var valueList = [];
     return(
-      <div className="SensorRegist-form-wrapper">
-        <h3>Regist Sensor</h3>
+      <div className="SensorRegister-form-wrapper">
+        <h3>Register Sensor</h3>
         <form onSubmit={this.handleSubmit(valueList)}>
           <table>
             <tbody>
@@ -49,4 +49,4 @@ class RegistSensor extends React.Component {
   }
 }
 
-export default RegistSensor;
+export default RegisterSensor;

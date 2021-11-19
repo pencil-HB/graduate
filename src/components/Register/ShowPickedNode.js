@@ -7,7 +7,7 @@ function ShowPickedNode(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   //var api = 'http://localhost:5000/nodes'
-  var api = 'http://172.20.10.3:8080/regist/nodes'
+  var api = 'http://172.20.10.4:8080/register/nodes'
 
   const fetchNodes = async () => {
     try {
@@ -17,8 +17,8 @@ function ShowPickedNode(props) {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
 
-      //api = api + '?sink_id='+ props.selectedSink; //추후 수정 필요
-      api = api + '/'+ props.selectedSink; //추후 수정 필요
+      //api = api + '?sink_id='+ props.selectedSink; 
+      api = api + '/'+ props.selectedSink; 
 
 
       const response = await axios.get(
@@ -34,8 +34,6 @@ function ShowPickedNode(props) {
   useEffect(() => {
     fetchNodes();
   }, [props.selectedSink]);
-
-  //props.selectedSink, props.selectedNode
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error Occurred!</div>;

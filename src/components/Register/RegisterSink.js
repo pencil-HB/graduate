@@ -1,6 +1,6 @@
 import React from 'react';
 
-class RegistSink extends React.Component {
+class RegisterSink extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -12,8 +12,8 @@ class RegistSink extends React.Component {
 
   render() {
     return(
-      <div className="SinkRegist-form-wrapper">
-        <h3>Regist Sink Node</h3>
+      <div className="SinkRegister-form-wrapper">
+        <h3>Register Sink Node</h3>
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>
@@ -32,4 +32,4 @@ class RegistSink extends React.Component {
   }
 }
 
-export default RegistSink;
+export default RegisterSink;

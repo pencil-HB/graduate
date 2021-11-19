@@ -1,6 +1,6 @@
 import React from 'react';
 
-class RegistNode extends React.Component {
+class RegisterNode extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -13,8 +13,8 @@ class RegistNode extends React.Component {
 
   render() {
     return(
-      <div className="NodeRegist-form-wrapper">
-        <h3>Regist Node</h3>
+      <div className="NodeRegister-form-wrapper">
+        <h3>Register Node</h3>
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>
@@ -36,4 +36,4 @@ class RegistNode extends React.Component {
   }
 }
 
-export default RegistNode;
+export default RegisterNode;

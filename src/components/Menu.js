@@ -18,10 +18,10 @@ class Menu extends Component {
                 this.props.onChangePage('Vision');
             }.bind(this)}>Vision</Nav.Link></Nav.Item>
 
-            <Nav.Item><Nav.Link href="/Regist" onClick={function(e){
+            <Nav.Item><Nav.Link href="/Register" onClick={function(e){
                 e.preventDefault();
-                this.props.onChangePage('Regist');
-            }.bind(this)}>Regist</Nav.Link></Nav.Item>
+                this.props.onChangePage('Register');
+            }.bind(this)}>Register</Nav.Link></Nav.Item>
         </Nav>
         </Container>
       );

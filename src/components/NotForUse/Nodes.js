@@ -14,7 +14,7 @@ function Nodes() {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get(
-        'http://172.20.10.3:8080/regist/nodes'
+        'http://172.20.10.4:8080/register/nodes'
       );
       setNodes(response.data); // 데이터는 response.data 안에 들어있습니다.
     } catch (e) {

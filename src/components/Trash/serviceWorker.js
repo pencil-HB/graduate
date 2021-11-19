@@ -1,5 +1,5 @@
-// This optional code is used to register a service worker.
-// register() is not called by default.
+// This optional code is used to registerer a service worker.
+// registerer() is not called by default.
 
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
@@ -20,7 +20,7 @@ const isLocalhost = Boolean(
     )
 );
 
-export function register(config) {
+export function registerer(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
@@ -47,19 +47,19 @@ export function register(config) {
           );
         });
       } else {
-        // Is not localhost. Just register service worker
-        registerValidSW(swUrl, config);
+        // Is not localhost. Just registerer service worker
+        registererValidSW(swUrl, config);
       }
     });
   }
 }
 
-function registerValidSW(swUrl, config) {
+function registererValidSW(swUrl, config) {
   navigator.serviceWorker
-    .register(swUrl)
-    .then(registration => {
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
+    .registerer(swUrl)
+    .then(registerration => {
+      registerration.onupdatefound = () => {
+        const installingWorker = registerration.installing;
         if (installingWorker == null) {
           return;
         }
@@ -76,7 +76,7 @@ function registerValidSW(swUrl, config) {
 
               // Execute callback
               if (config && config.onUpdate) {
-                config.onUpdate(registration);
+                config.onUpdate(registerration);
               }
             } else {
               // At this point, everything has been precached.
@@ -86,7 +86,7 @@ function registerValidSW(swUrl, config) {
 
               // Execute callback
               if (config && config.onSuccess) {
-                config.onSuccess(registration);
+                config.onSuccess(registerration);
               }
             }
           }
@@ -94,7 +94,7 @@ function registerValidSW(swUrl, config) {
       };
     })
     .catch(error => {
-      console.error('Error during service worker registration:', error);
+      console.error('Error during service worker registerration:', error);
     });
 }
 
@@ -109,14 +109,14 @@ function checkValidServiceWorker(swUrl, config) {
         (contentType != null && contentType.indexOf('javascript') === -1)
       ) {
         // No service worker found. Probably a different app. Reload the page.
-        navigator.serviceWorker.ready.then(registration => {
-          registration.unregister().then(() => {
+        navigator.serviceWorker.ready.then(registerration => {
+          registerration.unregisterer().then(() => {
             window.location.reload();
           });
         });
       } else {
         // Service worker found. Proceed as normal.
-        registerValidSW(swUrl, config);
+        registererValidSW(swUrl, config);
       }
     })
     .catch(() => {
@@ -126,10 +126,10 @@ function checkValidServiceWorker(swUrl, config) {
     });
 }
 
-export function unregister() {
+export function unregisterer() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(registration => {
-      registration.unregister();
+    navigator.serviceWorker.ready.then(registerration => {
+      registerration.unregisterer();
     });
   }
 }

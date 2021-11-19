@@ -7,7 +7,7 @@ function ShowSink(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   //var api = 'http://localhost:5000/sinks'
-  var api = 'http://172.20.10.3:8080/regist/sinks'
+  var api = 'http://172.20.10.4:8080/register/sinks'
 
   const fetchSinks = async () => {
     try {
@@ -17,7 +17,7 @@ function ShowSink(props) {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
 
-      //api = api + '?sink_id='+ props.selectedSink; //추후 수정 필요
+      //api = api + '?sink_id='+ props.selectedSink; 
 
       const response = await axios.get(
         api
@@ -33,9 +33,6 @@ function ShowSink(props) {
   useEffect(() => {
     fetchSinks();
   }, []);
-
-  //props.selectedSink 위에있던거
-
 
   if (loading) return <div> Loading...</div>;
   if (error) return <div>Error Occurred!</div>;

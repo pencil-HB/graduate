@@ -8,7 +8,7 @@ class NodeList extends Component{
         var i = 0;
 
         const response = axios.get(
-            'http://172.20.10.3:8080/regist/nodes'
+            'http://172.20.10.4:8080/register/nodes'
         );
 
         nodes = JSON.parse(JSON.stringify(response.data))

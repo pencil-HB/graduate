@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import ShowPickedSensor from './Regist/ShowPickedSensor';
-import ShowPickedNode from './Regist/ShowPickedNode';
-import ShowSink from './Regist/ShowSink';
-import RegistNode from './Regist/RegistNode';
-import RegistSensor from './Regist/RegistSensor';
-import RegistSink from './Regist/RegistSink';
-import Popup from './Regist/Popup';
+import ShowPickedSensor from './Register/ShowPickedSensor';
+import ShowPickedNode from './Register/ShowPickedNode';
+import ShowSink from './Register/ShowSink';
+import RegisterNode from './Register/RegisterNode';
+import RegisterSensor from './Register/RegisterSensor';
+import RegisterSink from './Register/RegisterSink';
+import Popup from './Register/Popup';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FiPlusSquare,FiMinusSquare } from 'react-icons/fi';
 
 
-class Regist extends Component {
+class Register extends Component {
   constructor(props){ //초기화
     super(props);
     this.state = {
@@ -23,7 +23,7 @@ class Regist extends Component {
 
     render() {
       var size="30px";
-      var api = 'http://172.20.10.3:8080/regist/'
+      var api = 'http://172.20.10.4:8080/register/'
       //var api = 'http://localhost:5000/'
 
       return (
@@ -140,7 +140,7 @@ class Regist extends Component {
             <Popup
               trigger={this.state.sinkAdd}
               triggerOff={function(){ this.setState({sinkAdd: false})}.bind(this)}>
-              <RegistSink handleSinkR={function(sensor_info){
+              <RegisterSink handleSinkR={function(sensor_info){
                 fetch(api+'sinks', {	// fetch를 통해 Ajax통신을 한다.
                 method: 'post',	// 방식은 post
                 headers: {
@@ -152,13 +152,13 @@ class Regist extends Component {
                 alert("싱크노드 등록이 완료되었습니다.");
                 this.setState({sinkAdd : false});
               }.bind(this)}>
-              </RegistSink>
+              </RegisterSink>
             </Popup>
 
             <Popup
               trigger={this.state.nodeAdd}
               triggerOff={function(){ this.setState({nodeAdd: false})}.bind(this)}>
-              <RegistNode 
+              <RegisterNode 
                 selectedSink = {this.props.selectedSink}
                 handleNodeR={function(node_info){
                 fetch(api+'nodes', {	// fetch를 통해 Ajax통신을 한다.
@@ -171,13 +171,13 @@ class Regist extends Component {
                 .then(res => res.json());
                 alert("노드 등록이 완료되었습니다.");
                 this.setState({nodeAdd : false});
-              }.bind(this) }></RegistNode>
+              }.bind(this) }></RegisterNode>
             </Popup>
 
             <Popup
               trigger={this.state.sensorAdd}
               triggerOff={function(){ this.setState({sensorAdd: false})}.bind(this)}>
-              <RegistSensor
+              <RegisterSensor
                 selectedNode = {this.props.selectedNode}
                 handleSensorR={function(sensor_info){
                 fetch(api+'sensors', {	// fetch를 통해 Ajax통신을 한다.
@@ -190,11 +190,11 @@ class Regist extends Component {
                 .then(res => res.json());
                 alert("센서 등록이 완료되었습니다.");
                 this.setState({sensorAdd : false});
-              }.bind(this) }></RegistSensor>
+              }.bind(this) }></RegisterSensor>
             </Popup>
         </Container>
       );
     }
   }
 
-export default Regist;
+export default Register;

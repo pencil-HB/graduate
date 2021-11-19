@@ -26,9 +26,9 @@ class App extends Component {
                 page: 'Vision'
               });
             }
-            else if(_page === 'Regist'){
+            else if(_page === 'Register'){
               this.setState({
-                page: 'Regist'
+                page: 'Register'
               });
             }
             else {
